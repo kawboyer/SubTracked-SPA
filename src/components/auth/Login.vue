@@ -20,7 +20,7 @@
 
 <script>
 import firebase from 'firebase'
-export default{
+export default {
     name: 'Login',
     data(){
         return {
