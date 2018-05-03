@@ -5,8 +5,9 @@ var Github = require("../models/Github.js");
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  Github.find(function (err, dbGithub) {
-    if (err) return next(err);
+  console.log("Github");
+  Github.find({}, function (err, dbGithub) {
+    if (err) throw err;
     res.json(dbGithub);
   });
 });
