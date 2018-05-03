@@ -3,10 +3,13 @@ import Router from 'vue-router'
 import Footer from '@/components/layout/Footer'
 import Navbar from '@/components/layout/Navbar'
 import Signup from '@/components/auth/Signup'
+import Login from '@/components/auth/Login'
+import Subscription from '@/components/home/Subscription'
+import firebase from 'firebase'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   routes: [
     // {
     //   path: '/footer',
@@ -22,6 +25,37 @@ export default new Router({
       path: '/',
       name: 'Navbar',
       component: Navbar
+    },
+    {
+      path: '/login',
+      name: 'Login',
+      component: Login
+    },
+    {
+      path: '/subscription',
+      name: 'Subscription',
+      component: Subscription,
+      meta: {
+        requiresAuth: true
+      }
     }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  // Check to see if route requires auth
+  if (to.matched.some(rec => rec.meta.requiresAuth)) {
+    let user = firebase.auth().currentUser
+    if(user) {
+      // If user signed in, proceed to route
+      next()
+    } else {
+      // no user signed in, redirect to login
+      next({ name: 'Login'})
+    }
+  } else {
+    next()
+  }
+})
+
+export default router
