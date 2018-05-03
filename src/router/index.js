@@ -18,19 +18,20 @@ const router = new Router({
     // },
     {
       path: '/',
-      name: 'Signup',
-      component: Signup
-    },
-    {
-      path: '/',
-      name: 'Navbar',
-      component: Navbar
-    },
-    {
-      path: '/login',
       name: 'Login',
       component: Login
     },
+    {
+      path: '/signup',
+      name: 'Signup',
+      component: Signup
+    },
+    // {
+    //   path: '/',
+    //   name: 'Navbar',
+    //   component: Navbar
+    // },
+   
     {
       path: '/subscription',
       name: 'Subscription',
@@ -49,6 +50,7 @@ router.beforeEach((to, from, next) => {
     if(user) {
       // If user signed in, proceed to route
       next()
+
     } else {
       // no user signed in, redirect to login
       next({ name: 'Login'})

@@ -3,8 +3,10 @@
     <nav class="deep-purple darken-1">
       <div class="container">
         <!-- REPLACE THE a herf below with this if we want to redirect it -->
-        <!-- <router-link :to="{ name: 'WHATCHUWANT' }">WHATCHUWANT</router-link> -->
-        <a href="" class="brand-logo left">SubTracked</a>
+        <li class="brand-logo left" v-if="user"><router-link :to="{ name: 'Subscription' }">Subtracked</router-link></li>
+        <li class="brand-logo left" v-if="!user"><router-link :to="{ name: 'Login' }">Subtracked</router-link></li>
+
+        <!-- <a href="" class="brand-logo left">SubTracked</a> -->
         <ul class="right">
           <li v-if="!user"><router-link :to="{ name: 'Signup' }">Signup</router-link></li>
           <li v-if="!user"><router-link :to="{ name: 'Login' }">Login</router-link></li>
