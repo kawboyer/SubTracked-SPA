@@ -31,7 +31,6 @@ const router = new Router({
     //   name: 'Navbar',
     //   component: Navbar
     // },
-  
     {
       path: '/subscription',
       name: 'Subscription',
@@ -50,6 +49,7 @@ router.beforeEach((to, from, next) => {
     if(user) {
       // If user signed in, proceed to route
       next()
+
     } else {
       // no user signed in, redirect to login
       next({ name: 'Login'})
