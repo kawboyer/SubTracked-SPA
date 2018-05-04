@@ -1,6 +1,6 @@
 <template>
 
-   <div class="card">
+   <div class="container">
    <div id="subscription" class="container">
      <h1 class="card-header">SubTracked</h1>
      <!-- Messages -->
