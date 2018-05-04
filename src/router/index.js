@@ -31,7 +31,6 @@ const router = new Router({
     //   name: 'Navbar',
     //   component: Navbar
     // },
-   
     {
       path: '/subscription',
       name: 'Subscription',
