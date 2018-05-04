@@ -4,11 +4,17 @@
    <div id="subscription" class="container">
      <h1 class="card-header">SubTracked</h1>
      <!-- Messages -->
-     <div v-for="message in messages" class="card">
+     <div v-for="(message, index) in messages" v-bind:key="index" class="card">
        <div class="card-body">
          <!-- Subscription -->
          <h6 class="card-subtitle mb-2 text-muted">{{ message.nickname }}</h6>
          <!-- SUBSCRIPTION CONTENT -->
+         <!-- Category -->
+          <p v-if="message !== editingMessage" class="card-text">Category: {{ message.category }}</p>
+         <div v-else>
+           <p>Category:</p>
+           <textarea v-model="subCategory" class="form-control"></textarea>
+         </div>
          <!-- price -->
          <p v-if="message !== editingMessage" class="card-text">Price: {{ message.price }}</p>
          <div v-else>
@@ -71,15 +77,10 @@
          <input v-model="nickname" class="form-control" />
        </div>
        <!-- Category -->
-       <div class="form-group input-field browser-default">
-           <label>Choose Category</label>
-           <select>
-             <option >Goat</option>
-             <option >Goat</option>
-             <option>Goat</option>
-           </select>
-         
-         </div>
+       <div class="form-group">
+         <label>Category:</label>
+         <input v-model="subCategory" class="form-control" />
+       </div>
        <!-- price -->
        <div class="form-group">
          <label>Price:</label>
@@ -126,6 +127,7 @@ export default {
       messages: [],
         messageText: '',
         nickname: '',
+        subCategory: '',
         subPrice: '',
         subFrequency: '',
         subStartDate: '',
@@ -139,12 +141,14 @@ export default {
             text: this.messageText,
             nickname: this.nickname,
             price: this.subPrice,
+            category: this.subCategory,
             frequency: this.subFrequency,
             date: this.subStartDate,
             reminder: this.subReminder
           })
           this.messageText = ''
           this.nickname = ''
+          this.subCategory =''
           this.subPrice = ''
           this.subFrequency = ''
           this.subStartDate = ''
@@ -156,6 +160,7 @@ export default {
         editMessage(message) {
           this.editingMessage = message
           this.messageText = message.text
+          this.subCategory = message.category
           this.subPrice = message.price
           this.subFrequency = message.frequency
           this.subStartDate = message.date
@@ -164,6 +169,7 @@ export default {
         cancelEditing() {
           this.editingMessage = null
           this.messageText = ''
+          this.subCategory = ''
           this.subPrice = ''
           this.subFrequency = ''
           this.subStartDate = ''
@@ -173,6 +179,7 @@ export default {
           // Careful with this one!!!!!!
           messagesRef.child(this.editingMessage.id).update({
             text: this.messageText,
+            category: this.subCategory,
             price: this.subPrice,
             frequency: this.subFrequency,
             date: this.subStartDate,
@@ -208,6 +215,7 @@ export default {
         messagesRef.on('child_changed', snapshot => {
           const updatedMessage = this.messages.find(message => message.id === snapshot.key)
           updatedMessage.text = snapshot.val().text
+          updatedMessage.category = snapshot.val().category
           updatedMessage.price = snapshot.val().price
           updatedMessage.frequency = snapshot.val().frequency
           updatedMessage.date = snapshot.val().date
