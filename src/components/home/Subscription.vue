@@ -1,7 +1,9 @@
 <template>
 
-   <div class="container">
-       <PieChart></PieChart>
+<div class="container">
+    <PieChart></PieChart>
+
+   <div class="card">
    <div id="subscription" class="container">
      <h1 class="card-header">SubTracked</h1>
      <!-- Messages -->
