@@ -6,7 +6,8 @@
         <li class="brand-logo left" v-if="user"><router-link :to="{ name: 'Subscription' }">Subtracked</router-link></li>
         <li class="brand-logo left" v-if="!user"><router-link :to="{ name: 'Login' }">Subtracked</router-link></li>
 
-        <!-- <a href="" class="brand-logo left">SubTracked</a> -->
+        <!-- <router-link :to="{ name: 'WHATCHUWANT' }">WHATCHUWANT</router-link> -->
+
         <ul class="right">
           <li v-if="!user"><router-link :to="{ name: 'Signup' }">Signup</router-link></li>
           <li v-if="!user"><router-link :to="{ name: 'Login' }">Login</router-link></li>
