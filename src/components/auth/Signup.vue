@@ -60,7 +60,7 @@ export default {
                 user_id: user.uid
               })
             }).then(() => {
-              this.$router.push({ name: 'GMap' })
+              this.$router.push({ name: 'Subscription' })
             })
             .catch(err => {
               this.feedback = err.message
