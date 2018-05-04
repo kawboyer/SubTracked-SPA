@@ -1,6 +1,7 @@
 <template>
 
    <div class="container">
+       <PieChart></PieChart>
    <div id="subscription" class="container">
      <h1 class="card-header">SubTracked</h1>
      <!-- Messages -->
@@ -116,12 +117,17 @@
 
 <script>
 
+import PieChart from '@/components/home/PieChart'
+
 import db from '@/firebase/init'
 import firebase from 'firebase'
 const database = firebase.database()
 const messagesRef = database.ref('messages')
 export default {
   name: 'Subscription',
+  components: {
+    PieChart
+  },
   data() {
     return {
       messages: [],
