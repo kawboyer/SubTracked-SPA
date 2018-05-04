@@ -18,19 +18,20 @@ const router = new Router({
     // },
     {
       path: '/',
-      name: 'Signup',
-      component: Signup
-    },
-    {
-      path: '/',
-      name: 'Navbar',
-      component: Navbar
-    },
-    {
-      path: '/login',
       name: 'Login',
       component: Login
     },
+    {
+      path: '/signup',
+      name: 'Signup',
+      component: Signup
+    },
+    // {
+    //   path: '/',
+    //   name: 'Navbar',
+    //   component: Navbar
+    // },
+  
     {
       path: '/subscription',
       name: 'Subscription',
