@@ -4,12 +4,12 @@ export default {
   extends: Pie,
   mounted () {
     this.renderChart({
-      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+      labels: ['Business', 'Entertainment', 'Food', 'Game', 'Home', 'Music', 'Shopping', 'Tech'],
       datasets: [
         {
           label: 'Data One',
-          backgroundColor: '#FC2525',
-          data: [40, 39, 10, 40, 39, 80, 40]
+          backgroundColor: ['#FCFA70', '#6A99CB', '#4D7CAE', '#375A7F', '#FCFA70', '#6A99CB', '#4D7CAE', '#375A7F'],
+          data: [40, 39, 10, 40, 39, 80, 40, 20]
         }
       ]
     }, {responsive: true, maintainAspectRatio: false})

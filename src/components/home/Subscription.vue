@@ -3,9 +3,10 @@
 <div class="container">
     <PieChart></PieChart>
 
-   <div class="card">
+   <!-- <div class="card"> -->
    <div id="subscription" class="container">
-     <h1 class="card-header">SubTracked</h1>
+     <!-- <h1 class="card-header">SubTracked</h1> -->
+     
      <!-- Messages -->
      <div v-for="(message, index) in messages" v-bind:key="index" class="card">
        <div class="card-body">
