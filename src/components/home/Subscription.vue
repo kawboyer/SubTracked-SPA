@@ -4,8 +4,8 @@
     <PieChart></PieChart>
 
    <div class="card">
-   <div id="subscription" class="container">
-     <h1 class="card-header">SubTracked</h1>
+   <div v-if="profile" id="subscription" class="container">
+     <h1 class="card-header">{{ profile.alias }}'s SubTracked</h1>
      <!-- Messages -->
      <div v-for="(message, index) in messages" v-bind:key="index" class="card">
        <div class="card-body">
@@ -118,127 +118,140 @@
 </template>
 
 <script>
+import PieChart from "@/components/home/PieChart";
 
-import PieChart from '@/components/home/PieChart'
-
-import db from '@/firebase/init'
-import firebase from 'firebase'
-const database = firebase.database()
-const messagesRef = database.ref('messages')
+import db from "@/firebase/init";
+import firebase from "firebase";
+// const database = firebase.database();
+// const messagsesRefs = database.ref("messages");
+let ref = db.collection("users").doc(this.id);
 export default {
-  name: 'Subscription',
+  name: "Subscription",
   components: {
     PieChart
   },
   data() {
     return {
       messages: [],
-        messageText: '',
-        nickname: '',
-        subCategory: '',
-        subPrice: '',
-        subFrequency: '',
-        subStartDate: '',
-        subReminder: '',
-        editingMessage: null
+      messageText: "",
+      nickname: "",
+      subCategory: "",
+      subPrice: "",
+      subFrequency: "",
+      subStartDate: "",
+      subReminder: "",
+      editingMessage: null,
+      profile: null
+    };
+  },
+  methods: {
+    storeMessage() {
+      ref.push({
+        text: this.messageText,
+        nickname: this.nickname,
+        price: this.subPrice,
+        category: this.subCategory,
+        frequency: this.subFrequency,
+        date: this.subStartDate,
+        reminder: this.subReminder
+      });
+      this.messageText = "";
+      this.nickname = "";
+      this.subCategory = "";
+      this.subPrice = "";
+      this.subFrequency = "";
+      this.subStartDate = "";
+      this.subReminder = "";
+    },
+    deleteMessage(message) {
+      ref.child(message.id).remove();
+    },
+    editMessage(message) {
+      this.editingMessage = message;
+      this.messageText = message.text;
+      this.subCategory = message.category;
+      this.subPrice = message.price;
+      this.subFrequency = message.frequency;
+      this.subStartDate = message.date;
+      this.subReminder = message.reminder;
+    },
+    cancelEditing() {
+      this.editingMessage = null;
+      this.messageText = "";
+      this.subCategory = "";
+      this.subPrice = "";
+      this.subFrequency = "";
+      this.subStartDate = "";
+      this.subReminder = "";
+    },
+    updateMessage() {
+      // Careful with this one!!!!!!
+      ref.child(this.editingMessage.id).update({
+        text: this.messageText,
+        category: this.subCategory,
+        price: this.subPrice,
+        frequency: this.subFrequency,
+        date: this.subStartDate,
+        reminder: this.subReminder
+      });
+      this.cancelEditing();
     }
-  }, 
-   methods: {
-        storeMessage() {
-          messagesRef.push({
-            text: this.messageText,
-            nickname: this.nickname,
-            price: this.subPrice,
-            category: this.subCategory,
-            frequency: this.subFrequency,
-            date: this.subStartDate,
-            reminder: this.subReminder
-          })
-          this.messageText = ''
-          this.nickname = ''
-          this.subCategory =''
-          this.subPrice = ''
-          this.subFrequency = ''
-          this.subStartDate = ''
-          this.subReminder = ''
-        },
-        deleteMessage(message) {
-          messagesRef.child(message.id).remove()
-        },
-        editMessage(message) {
-          this.editingMessage = message
-          this.messageText = message.text
-          this.subCategory = message.category
-          this.subPrice = message.price
-          this.subFrequency = message.frequency
-          this.subStartDate = message.date
-          this.subReminder = message.reminder
-        },
-        cancelEditing() {
-          this.editingMessage = null
-          this.messageText = ''
-          this.subCategory = ''
-          this.subPrice = ''
-          this.subFrequency = ''
-          this.subStartDate = ''
-          this.subReminder = ''
-        },
-        updateMessage() {
-          // Careful with this one!!!!!!
-          messagesRef.child(this.editingMessage.id).update({
-            text: this.messageText,
-            category: this.subCategory,
-            price: this.subPrice,
-            frequency: this.subFrequency,
-            date: this.subStartDate,
-            reminder: this.subReminder
-          })
-          this.cancelEditing()
-        }
-      },
-      created() {
-        // value = snapshot.val() | key = snapshot.key
-        messagesRef.on('child_added', snapshot => {
-          this.messages.push({ ...snapshot.val(),
-            id: snapshot.key
-          })
-          if (snapshot.val().nickname !== this.nickname) {
-            nativeToast({
-              message: `New message by ${snapshot.val().nickname}`,
-              type: 'success'
-            })
-          }
-        })
-        messagesRef.on('child_removed', snapshot => {
-          const deletedMessage = this.messages.find(message => message.id === snapshot.key)
-          const index = this.messages.indexOf(deletedMessage)
-          this.messages.splice(index, 1)
-          if (snapshot.val().nickname !== this.nickname) {
-            nativeToast({
-              message: `Message deleted by ${snapshot.val().nickname}`,
-              type: 'warning'
-            })
-          }
-        })
-        messagesRef.on('child_changed', snapshot => {
-          const updatedMessage = this.messages.find(message => message.id === snapshot.key)
-          updatedMessage.text = snapshot.val().text
-          updatedMessage.category = snapshot.val().category
-          updatedMessage.price = snapshot.val().price
-          updatedMessage.frequency = snapshot.val().frequency
-          updatedMessage.date = snapshot.val().date
-          updatedMessage.reminder = snapshot.val().reminder
-
-          if (snapshot.val().nickname !== this.nickname) {
-            nativeToast({
-              message: `Message edited by ${snapshot.val().nickname}`,
-              type: 'info'
-            })
-          }
-        })
+  },
+  created() {
+    // value = snapshot.val() | key = snapshot.key
+    
+    ref
+      .doc(this.$route.params.id)
+      .get()
+      .then(user => {
+        this.profile = user.data();
+      });
+    ref.on("child_added", snapshot => {
+      this.messages.push({
+        ...snapshot.val(),
+        id: snapshot.key
+      });
+      if (snapshot.val().nickname !== this.nickname) {
+        nativeToast({
+          message: `New message by ${snapshot.val().nickname}`,
+          type: "success"
+        });
       }
-    }
-  </script>
+    });
+    ref.on("child_removed", snapshot => {
+      const deletedMessage = this.messages.find(
+        message => message.id === snapshot.key
+      );
+      const index = this.messages.indexOf(deletedMessage);
+      this.messages.splice(index, 1);
+      if (snapshot.val().nickname !== this.nickname) {
+        nativeToast({
+          message: `Message deleted by ${snapshot.val().nickname}`,
+          type: "warning"
+        });
+      }
+    });
+    ref.on("child_changed", snapshot => {
+      const updatedMessage = this.messages.find(
+        message => message.id === snapshot.key
+      );
+      updatedMessage.text = snapshot.val().text;
+      updatedMessage.category = snapshot.val().category;
+      updatedMessage.price = snapshot.val().price;
+      updatedMessage.frequency = snapshot.val().frequency;
+      updatedMessage.date = snapshot.val().date;
+      updatedMessage.reminder = snapshot.val().reminder;
+
+      if (snapshot.val().nickname !== this.nickname) {
+        nativeToast({
+          message: `Message edited by ${snapshot.val().nickname}`,
+          type: "info"
+        });
+      }
+    });
+  }
+};
+</script>
 
 <style>
 

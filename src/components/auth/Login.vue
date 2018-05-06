@@ -19,45 +19,48 @@
 </template>
 
 <script>
-import firebase from 'firebase'
+import firebase from "firebase";
 export default {
-    name: 'Login',
-    data(){
-        return {
-            email: null,
-            password: null,
-            feedback: null,
-        }
-    },
-    methods: {
-        login(){
-            if(this.email && this.password){
-                firebase.auth().signInWithEmailAndPassword(this.email, this.password)
-                .then(user => {
-                    console.log(user)
-                    //CHANGE THIS TO SUB PAGE!!!!!
-                    this.$router.push({ name: 'Subscription'})
-                }).catch(err => {
-                    this.feedback = err.message
-                })
-                this.feedback = null
-            } else {
-                this.feedback ='Please fill out both fields'
-            }
-        }
+  name: "Login",
+  data() {
+    return {
+      email: null,
+      password: null,
+      feedback: null
+    };
+  },
+  methods: {
+    login() {
+      if (this.email && this.password) {
+        firebase
+          .auth()
+          .signInWithEmailAndPassword(this.email, this.password)
+          .then(user => {
+            console.log(user);
+            //CHANGE THIS TO SUB PAGE!!!!!
+            this.$router.push({ name: 'Subscript', params: {id: user.uid}});
+          })
+          .catch(err => {
+            this.feedback = err.message;
+          });
+        this.feedback = null;
+      } else {
+        this.feedback = "Please fill out both fields";
+      }
     }
-}
+  }
+};
 </script>
 
 <style>
-.login{
-    max-width: 400px;
-    margin-top: 60px;
+.login {
+  max-width: 400px;
+  margin-top: 60px;
 }
-.login h2{
-    font-size: 2.4em;
+.login h2 {
+  font-size: 2.4em;
 }
-.login .field{
-    margin-bottom: 16px;
+.login .field {
+  margin-bottom: 16px;
 }
 </style>
