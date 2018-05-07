@@ -2,6 +2,8 @@
 
 <div class="container">
     <PieChart></PieChart>
+    <Total></Total>
+
 
 
 
@@ -149,6 +151,7 @@ function writeUserData(userId, name, email, imageUrl) {
 }
 <script>
 import PieChart from "@/components/home/PieChart";
+import Total from '@/components/home/Total';
 
 import db from "@/firebase/init";
 import firebase from "firebase";
@@ -160,7 +163,8 @@ let ref = db.collection("users").doc(this.id);
 export default {
   name: "Subscription",
   components: {
-    PieChart
+    PieChart,
+    Total
   },
   data() {
     return {
