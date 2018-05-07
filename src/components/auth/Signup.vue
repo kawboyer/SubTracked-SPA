@@ -16,7 +16,7 @@
       </div>
       <p v-if="feedback" class="red-text center">{{ feedback }}</p>
       <div class="field center">
-        <button class="btn deep-purple">Signup</button>
+        <button @click="logout" class="btn deep-purple">Signup</button>
       </div>
     </form>
   </div>
@@ -56,11 +56,10 @@ export default {
             .then(user => {
               ref.set({
                 alias: this.alias,
-                geolocation: null,
                 user_id: user.uid
               })
             }).then(() => {
-              this.$router.push({ name: 'GMap' })
+              this.$router.push({ name: 'Login' })
             })
             .catch(err => {
               this.feedback = err.message
@@ -70,6 +69,14 @@ export default {
       } else {
         this.feedback = 'Please fill in all fields'
       }
+    },
+     logout() {
+      firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          this.$router.push({ name: 'Login' });
+        });
     }
   }
 }

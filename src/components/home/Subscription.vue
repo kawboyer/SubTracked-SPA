@@ -6,6 +6,7 @@
 
 
 
+
     <!-- <md-modal :result.sync="result">
       <h4>Modal Header</h4>
       <p>A bunch of text</p>
@@ -25,6 +26,7 @@
    <!-- <div class="card"> -->
    <div id="subscription" class="container">
      <!-- <h1 class="card-header">SubTracked</h1> -->
+
 
      <!-- Messages -->
      <div v-for="(message, index) in messages" v-bind:key="index" class="card">
@@ -140,15 +142,24 @@
  </div>
 
 </template>
-
+function writeUserData(userId, name, email, imageUrl) {
+  firebase.database().ref('users/' + userId).set({
+    username: name,
+    email: email,
+    profile_picture : imageUrl
+  });
+}
 <script>
 import PieChart from "@/components/home/PieChart";
 import Total from '@/components/home/Total';
 
 import db from "@/firebase/init";
 import firebase from "firebase";
-const database = firebase.database();
-const messagesRef = database.ref("messages");
+
+// const database = firebase.database();
+// const messagsesRefs = database.ref("messages");
+let ref = db.collection("users").doc(this.id);
+
 export default {
   name: "Subscription",
   components: {
@@ -165,12 +176,17 @@ export default {
       subFrequency: "",
       subStartDate: "",
       subReminder: "",
-      editingMessage: null
+
+      editingMessage: null,
+      profile: null
+
     };
   },
   methods: {
     storeMessage() {
-      messagesRef.push({
+
+      ref.push({
+
         text: this.messageText,
         nickname: this.nickname,
         price: this.subPrice,
@@ -188,7 +204,9 @@ export default {
       this.subReminder = "";
     },
     deleteMessage(message) {
-      messagesRef.child(message.id).remove();
+
+      ref.child(message.id).remove();
+
     },
     editMessage(message) {
       this.editingMessage = message;
@@ -210,7 +228,9 @@ export default {
     },
     updateMessage() {
       // Careful with this one!!!!!!
-      messagesRef.child(this.editingMessage.id).update({
+
+      ref.child(this.editingMessage.id).update({
+
         text: this.messageText,
         category: this.subCategory,
         price: this.subPrice,
@@ -223,7 +243,16 @@ export default {
   },
   created() {
     // value = snapshot.val() | key = snapshot.key
-    messagesRef.on("child_added", snapshot => {
+
+    
+    ref
+      .doc(this.$route.params.id)
+      .get()
+      .then(user => {
+        this.profile = user.data();
+      });
+    ref.on("child_added", snapshot => {
+
       this.messages.push({
         ...snapshot.val(),
         id: snapshot.key
@@ -235,7 +264,9 @@ export default {
         });
       }
     });
-    messagesRef.on("child_removed", snapshot => {
+
+    ref.on("child_removed", snapshot => {
+
       const deletedMessage = this.messages.find(
         message => message.id === snapshot.key
       );
@@ -248,7 +279,11 @@ export default {
         });
       }
     });
-    messagesRef.on("child_changed", snapshot => {
+
+    ref.on("child_changed", snapshot => {
+
+
+
       const updatedMessage = this.messages.find(
         message => message.id === snapshot.key
       );
@@ -269,6 +304,7 @@ export default {
   }
 };
 
+
 // // is available as global after link
 // var VueMaterialComponents;
 
@@ -283,6 +319,7 @@ export default {
 // VueMaterialComponents.registerComponents();
 // VueMaterialComponents.registerDirectives();
 // VueMaterialComponents.registerAll();
+
 </script>
 
 <style>
