@@ -1,9 +1,9 @@
 <template>
   <div class="navbar">
-    <nav class="deep-purple darken-1">
+    <nav class="navbar-color">
       <div class="container">
         <!-- REPLACE THE a herf below with this if we want to redirect it -->
-        <li class="brand-logo left" v-if="user"><router-link :to="{ name: 'Subscription' }">Subtracked</router-link></li>
+        <li class="brand-logo left" v-if="user"><router-link :to="{ name: 'Subscript' }">Subtracked</router-link></li>
         <li class="brand-logo left" v-if="!user"><router-link :to="{ name: 'Login' }">Subtracked</router-link></li>
 
         <!-- <router-link :to="{ name: 'WHATCHUWANT' }">WHATCHUWANT</router-link> -->
@@ -44,7 +44,7 @@ export default {
         .auth()
         .signOut()
         .then(() => {
-          this.$router.push({ name: "Login" });
+          this.$router.push({ name: 'Login' });
         });
     }
   }
@@ -52,5 +52,8 @@ export default {
 </script>
 
 <style>
+.navbar-color {
+  background-color: #0D3446
+}
 
 </style>
