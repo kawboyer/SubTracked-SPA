@@ -121,7 +121,7 @@
 
 <script>
 import PieChart from "@/components/home/PieChart";
-import Total from "@/components/home/Total"
+import Total from "@/components/home/Total";
 import db from "@/firebase/init";
 import firebase from "firebase";
 
