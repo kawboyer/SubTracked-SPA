@@ -2,6 +2,7 @@
 
 <div class="container">
     <PieChart></PieChart>
+    <Total></Total>
 
    <div class="card">
    <div id="subscription" class="container">
@@ -121,13 +122,15 @@
 
 <script>
 import PieChart from "@/components/home/PieChart";
+import Total from "@/components/home/Total";
 import db from "@/firebase/init";
 import firebase from "firebase";
 
 export default {
   name: "Subscript",
   components: {
-    PieChart
+    PieChart,
+    Total
   },
   data() {
     return {
