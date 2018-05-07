@@ -1,6 +1,6 @@
 <template>
   <div class="navbar">
-    <nav class="deep-purple darken-1">
+    <nav class="navbar-color">
       <div class="container">
         <!-- REPLACE THE a herf below with this if we want to redirect it -->
         <li class="brand-logo left" v-if="user"><router-link :to="{ name: 'Subscript' }">Subtracked</router-link></li>
@@ -52,5 +52,8 @@ export default {
 </script>
 
 <style>
+.navbar-color {
+  background-color: #0D3446
+}
 
 </style>

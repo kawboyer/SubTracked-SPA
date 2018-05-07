@@ -4,9 +4,7 @@
     <PieChart></PieChart>
     <Total></Total>
 
-   <div class="card">
    <div id="subscription" class="container">
-     <h1 class="card-header"> SubTracked</h1>
      <!-- Messages -->
      <div v-for="(message, index) in messages" v-bind:key="index" class="card">
        <div class="card-body">
@@ -76,6 +74,7 @@
 
 
      <hr>
+     <div class="card-outer">
      <!-- New Message -->
      <form v-if="!editingMessage" @submit.prevent="storeMessage">
        <div class="form-group">
@@ -355,3 +354,12 @@ export default {
   }
 };
 </script>
+
+<style>
+.card-outer {
+  background-color:#71ADB5;
+}
+.card {
+  background-color: #176D81
+}
+</style>
