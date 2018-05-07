@@ -3,72 +3,96 @@
 <div class="container">
     <PieChart></PieChart>
 
-   <div class="card">
-   <div v-if="profile" id="subscription" class="container">
-     <h1 class="card-header">{{ profile.alias }}'s SubTracked</h1>
+
+
+    <!-- <md-modal :result.sync="result">
+      <h4>Modal Header</h4>
+      <p>A bunch of text</p>
+
+      <span slot="footer">
+        <md-button href="#" class="waves-effect waves-green btn-flat"
+          @click.prevent="broadcast('modal::close', 'agree')">
+          Agree
+        </md-button>
+      </span>
+    </md-modal> -->
+
+    <!-- <md-button href="#" @click.prevent="broadcast('modal::open')">
+      Modal
+    </md-button> -->
+
+   <!-- <div class="card"> -->
+   <div id="subscription" class="container">
+     <!-- <h1 class="card-header">SubTracked</h1> -->
+
+
      <!-- Messages -->
      <div v-for="(message, index) in messages" v-bind:key="index" class="card">
        <div class="card-body">
-         <!-- Subscription -->
-         <h6 class="card-subtitle mb-2 text-muted">{{ message.nickname }}</h6>
-         <!-- SUBSCRIPTION CONTENT -->
-         <!-- Category -->
-          <p v-if="message !== editingMessage" class="card-text">Category: {{ message.category }}</p>
-         <div v-else>
-           <p>Category:</p>
-           <textarea v-model="subCategory" class="form-control"></textarea>
-         </div>
-         <!-- price -->
-         <p v-if="message !== editingMessage" class="card-text">Price: {{ message.price }}</p>
-         <div v-else>
-           <p>Price:</p>
-           <textarea v-model="subPrice" class="form-control"></textarea>
-         </div>
-         <!-- <textarea v-else v-model="subPrice" class="form-control"></textarea> -->
+        <ul class="collapsible" :class="{popout: popout}">
+          <slot>
+            <!-- Subscription -->
+            <h6 class="card-subtitle mb-2 text-muted">{{ message.nickname }}</h6>
+            <!-- SUBSCRIPTION CONTENT -->
+            <!-- Category -->
+              <p v-if="message !== editingMessage" class="card-text">Category: {{ message.category }}</p>
+            <div v-else>
+              <p>Category:</p>
+              <textarea v-model="subCategory" class="form-control"></textarea>
+            </div>
+            <!-- price -->
+            <p v-if="message !== editingMessage" class="card-text">Price: {{ message.price }}</p>
+            <div v-else>
+              <p>Price:</p>
+              <textarea v-model="subPrice" class="form-control"></textarea>
+            </div>
+            <!-- <textarea v-else v-model="subPrice" class="form-control"></textarea> -->
 
-         <!-- frequency -->
-         <p v-if="message !== editingMessage" class="card-text">Frequency: {{ message.frequency }}</p>
-         <div v-else>
-           <p>Frequency:</p>
-           <textarea v-model="subFrequency" class="form-control"></textarea>
-         </div>
-         <!-- <textarea v-else v-model="subFrequency" class="form-control"></textarea> -->
+            <!-- frequency -->
+            <p v-if="message !== editingMessage" class="card-text">Frequency: {{ message.frequency }}</p>
+            <div v-else>
+              <p>Frequency:</p>
+              <textarea v-model="subFrequency" class="form-control"></textarea>
+            </div>
+            <!-- <textarea v-else v-model="subFrequency" class="form-control"></textarea> -->
 
-         <!-- date -->
-         <p v-if="message !== editingMessage" class="card-text">Start Date: {{ message.date }}</p>
-         <div v-else>
-           <p>Start Date:</p>
-           <textarea v-model="subStartDate" class="form-control"></textarea>
-         </div>
-         <!-- <textarea v-else v-model="subStartDate" class="form-control"></textarea> -->
+            <!-- date -->
+            <p v-if="message !== editingMessage" class="card-text">Start Date: {{ message.date }}</p>
+            <div v-else>
+              <p>Start Date:</p>
+              <textarea v-model="subStartDate" class="form-control"></textarea>
+            </div>
+            <!-- <textarea v-else v-model="subStartDate" class="form-control"></textarea> -->
 
-         <!-- reminder -->
-         <p v-if="message !== editingMessage" class="card-text">Reminder: {{ message.reminder }}</p>
-         <div v-else>
-           <p>Reminder:</p>
-           <textarea v-model="subReminder" class="form-control"></textarea>
-         </div>
-         <!-- <textarea v-else v-model="subReminder" class="form-control"></textarea> -->
+            <!-- reminder -->
+            <p v-if="message !== editingMessage" class="card-text">Reminder: {{ message.reminder }}</p>
+            <div v-else>
+              <p>Reminder:</p>
+              <textarea v-model="subReminder" class="form-control"></textarea>
+            </div>
+            <!-- <textarea v-else v-model="subReminder" class="form-control"></textarea> -->
 
-         <!-- Notes -->
-         <p v-if="message !== editingMessage" class="card-text">Message: {{ message.text }}</p>
-         <div v-else>
-           <p>Message:</p>
-           <textarea v-model="messageText" class="form-control"></textarea>
-         </div>
-         <!-- <textarea v-else v-model="messageText" class="form-control"></textarea> -->
+            <!-- Notes -->
+            <p v-if="message !== editingMessage" class="card-text">Message: {{ message.text }}</p>
+            <div v-else>
+              <p>Message:</p>
+              <textarea v-model="messageText" class="form-control"></textarea>
+            </div>
+            <!-- <textarea v-else v-model="messageText" class="form-control"></textarea> -->
 
 
-         <!-- actions -->
-         <div v-if="message !== editingMessage">
-           <a @click.prevent="deleteMessage(message)" href="#" class="card-link">Delete</a>
-           <a @click.prevent="editMessage(message)" href="#" class="card-link">Edit</a>
-         </div>
-         <div v-else>
-           <a @click.prevent="cancelEditing" href="#" class="card-link">Cancel</a>
-           <a @click.prevent="updateMessage" href="#" class="card-link">Update</a>
-         </div>
-       </div>
+            <!-- actions -->
+            <div v-if="message !== editingMessage">
+              <a @click.prevent="deleteMessage(message)" href="#" class="card-link">Delete</a>
+              <a @click.prevent="editMessage(message)" href="#" class="card-link">Edit</a>
+            </div>
+            <div v-else>
+              <a @click.prevent="cancelEditing" href="#" class="card-link">Cancel</a>
+              <a @click.prevent="updateMessage" href="#" class="card-link">Update</a>
+            </div>
+          </slot>
+        </ul>
+      </div>
      </div>
 
 
@@ -128,9 +152,11 @@ import PieChart from "@/components/home/PieChart";
 
 import db from "@/firebase/init";
 import firebase from "firebase";
+
 // const database = firebase.database();
 // const messagsesRefs = database.ref("messages");
 let ref = db.collection("users").doc(this.id);
+
 export default {
   name: "Subscription",
   components: {
@@ -146,13 +172,17 @@ export default {
       subFrequency: "",
       subStartDate: "",
       subReminder: "",
+
       editingMessage: null,
       profile: null
+
     };
   },
   methods: {
     storeMessage() {
+
       ref.push({
+
         text: this.messageText,
         nickname: this.nickname,
         price: this.subPrice,
@@ -170,7 +200,9 @@ export default {
       this.subReminder = "";
     },
     deleteMessage(message) {
+
       ref.child(message.id).remove();
+
     },
     editMessage(message) {
       this.editingMessage = message;
@@ -192,7 +224,9 @@ export default {
     },
     updateMessage() {
       // Careful with this one!!!!!!
+
       ref.child(this.editingMessage.id).update({
+
         text: this.messageText,
         category: this.subCategory,
         price: this.subPrice,
@@ -205,6 +239,7 @@ export default {
   },
   created() {
     // value = snapshot.val() | key = snapshot.key
+
     
     ref
       .doc(this.$route.params.id)
@@ -213,6 +248,7 @@ export default {
         this.profile = user.data();
       });
     ref.on("child_added", snapshot => {
+
       this.messages.push({
         ...snapshot.val(),
         id: snapshot.key
@@ -224,7 +260,9 @@ export default {
         });
       }
     });
+
     ref.on("child_removed", snapshot => {
+
       const deletedMessage = this.messages.find(
         message => message.id === snapshot.key
       );
@@ -237,7 +275,11 @@ export default {
         });
       }
     });
+
     ref.on("child_changed", snapshot => {
+
+
+
       const updatedMessage = this.messages.find(
         message => message.id === snapshot.key
       );
@@ -257,6 +299,23 @@ export default {
     });
   }
 };
+
+
+// // is available as global after link
+// var VueMaterialComponents;
+
+// // map of all components
+// VueMaterialComponents.components;
+// // map of all directives
+// VueMaterialComponents.directives;
+// // array of all mixins
+// VueMaterialComponents.mixins;
+
+// // registration callbacks to Vue
+// VueMaterialComponents.registerComponents();
+// VueMaterialComponents.registerDirectives();
+// VueMaterialComponents.registerAll();
+
 </script>
 
 <style>

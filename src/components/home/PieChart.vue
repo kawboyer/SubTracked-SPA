@@ -14,8 +14,8 @@ import VueCharts from 'vue-chartjs'
 
 export default {
   extends: Pie,
-  mixins: [mixins.reativeProp],
-  props: ['chartData', 'options'],
+  // mixins: [mixins.reativeProp],
+  // props: ['chartData', 'options'],
   name: 'app',
   components: {
     PieExample
