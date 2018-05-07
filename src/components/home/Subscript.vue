@@ -54,7 +54,7 @@
 
          <!-- Notes -->
          <p v-if="message !== editingMessage" class="card-text">Message: {{ message.text }}</p>
-         <div v-else></div>
+         <div v-else>
            <p>Message:</p>
            <textarea v-model="messageText" class="form-control"></textarea>
          </div>
