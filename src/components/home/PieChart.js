@@ -1,8 +1,6 @@
 import { Pie } from 'vue-chartjs'
 import db from "@/firebase/init";
 import firebase from "firebase";
-const database = firebase.database();
-const messagesRef = database.ref("messages");
 
 export default {
   extends: Pie,
@@ -33,7 +31,7 @@ export default {
             // console.log(doc.data());
         });
         console.log(totals)
-        
+
         // Render Chart
         this.renderChart({
           labels: Object.keys(totals),

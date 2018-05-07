@@ -2,6 +2,8 @@
 
 <div class="container">
     <PieChart></PieChart>
+    <Total></Total>
+
 
 
     <!-- <md-modal :result.sync="result">
@@ -141,6 +143,7 @@
 
 <script>
 import PieChart from "@/components/home/PieChart";
+import Total from '@/components/home/Total';
 
 import db from "@/firebase/init";
 import firebase from "firebase";
@@ -149,7 +152,8 @@ const messagesRef = database.ref("messages");
 export default {
   name: "Subscription",
   components: {
-    PieChart
+    PieChart,
+    Total
   },
   data() {
     return {
