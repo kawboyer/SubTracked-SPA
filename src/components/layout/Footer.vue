@@ -45,3 +45,9 @@ export default {
   }
 };
 </script>
+
+<style>
+  .page-footer {
+    background-color: #0D3446
+  }
+</style>
