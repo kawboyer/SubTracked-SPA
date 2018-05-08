@@ -60,7 +60,7 @@ export default {
                 user_id: user.uid
               })
             }).then(() => {
-              this.$router.push({ name: 'Login' })
+              this.$router.push({ name: 'Subscript' })
             })
             .catch(err => {
               this.feedback = err.message
@@ -71,14 +71,14 @@ export default {
         this.feedback = 'Please fill in all fields'
       }
     },
-     logout() {
-      firebase
-        .auth()
-        .signOut()
-        .then(() => {
-          this.$router.push({ name: 'Login' });
-        });
-    }
+    //  logout() {
+    //   firebase
+    //     .auth()
+    //     .signOut()
+    //     .then(() => {
+    //       this.$router.push({ name: 'Login' });
+    //     });
+    // }
   }
 }
 </script>
