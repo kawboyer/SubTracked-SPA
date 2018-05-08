@@ -106,7 +106,7 @@
        <div class="form-group" :class="{invalid: $v.subPrice.$error}">
          <label>Price:</label>
          <input v-model.number="subPrice" class="form-control" @blur="$v.subPrice.$touch()" />
-       <p v-if="!$v.subPrice.numeric">You must enter a vailid price</p>
+       <p v-if="!$v.subPrice.required">You must enter a vailid price</p>
        </div>
        <!-- frequency -->
        <div class="form-group" :class="{invalid: $v.subFrequency.$error}">
@@ -186,8 +186,7 @@ export default {
       required
     },
     subPrice: {
-      required,
-      numeric
+      required
     },
     subFrequency: {
       required
