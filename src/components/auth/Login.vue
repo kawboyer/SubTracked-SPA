@@ -11,9 +11,11 @@
                 <input id="password" type="password" v-model="password">
             </div>
             <p v-if="feedback" class="red-text center">{{ feedback }}</p>
+
             <br>
             <div class="field center">
                 <button class="btn login-btn :hover">Login</button>
+
             </div>
         </form>
     </div>
