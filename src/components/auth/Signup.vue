@@ -1,7 +1,7 @@
 <template>
   <div class="signup container">
     <form class="card-panel" @submit.prevent="signup">
-      <h2 class="center deep-purple-text">Signup</h2>
+      <h2 class="center signup-text">Signup</h2>
       <div class="field">
         <label for="email">Email</label>
         <input id="email" type="email" v-model="email">
@@ -15,8 +15,9 @@
         <input id="name" type="text" v-model="alias">
       </div>
       <p v-if="feedback" class="red-text center">{{ feedback }}</p>
+      <br>
       <div class="field center">
-        <button @click="logout" class="btn deep-purple">Signup</button>
+        <button @click="logout" class="btn signup-btn">Signup</button>
       </div>
     </form>
   </div>
@@ -92,5 +93,16 @@ export default {
 }
 .signup .field{
   margin-bottom: 16px;
+}
+
+.signup-btn {
+  background-color: #31708E;
+  color: #F7F9FB;
+  font-family: 'Noto Sans', sans-serif;
+}
+
+.signup-text {
+  color: #31708E;
+  font-family: 'Noto Sans', sans-serif;
 }
 </style>

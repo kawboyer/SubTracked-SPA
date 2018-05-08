@@ -37,7 +37,7 @@ export default {
           labels: Object.keys(totals),
           datasets: [
             {
-              backgroundColor: ['#FCFA70', '#6A99CB', '#4D7CAE', '#375A7F', '#FCFA70', '#6A99CB', '#4D7CAE', '#FCFA70'],
+              backgroundColor: ['#31708E', '#5085A5', '#8FC1E3', '#687864'],
               data: Object.values(totals),
             }
           ]
