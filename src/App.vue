@@ -21,7 +21,9 @@ export default {
 
 <style>
  #app {
-   background-color:#D8DFE2
+  background-color:#F7F9FB;
+  color: #687864;
+  font-family: 'Noto Sans', sans-serif;
  }
 
 </style>

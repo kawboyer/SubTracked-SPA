@@ -6,7 +6,6 @@
         <li class="brand-logo left" v-if="user"><router-link :to="{ name: 'Subscript', params: {id: user.uid}}">Subtracked</router-link></li>
         <li class="brand-logo left" v-if="!user"><router-link :to="{ name: 'Login' }">Subtracked</router-link></li>
 
-        <!-- <router-link :to="{ name: 'WHATCHUWANT' }">WHATCHUWANT</router-link> -->
 
         <ul class="right">
           <li v-if="!user"><router-link :to="{ name: 'Signup' }">Signup</router-link></li>
@@ -53,7 +52,9 @@ export default {
 
 <style>
 .navbar-color {
-  background-color: #0D3446
+  background-color:#31708E;
+  color: #F7F9FB;
+  font-family: 'Noto Sans', sans-serif;
 }
 
 </style>

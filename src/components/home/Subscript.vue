@@ -1,12 +1,13 @@
 <template>
 
 <div class="container">
+    <br>
     <PieChart></PieChart>
     <Total></Total>
 
    <div id="subscription" class="container">
      <!-- Messages -->
-     <div v-for="(message, index) in messages" v-bind:key="index" class="card">
+     <div v-for="(message, index) in messages" v-bind:key="index" class="card subcard">
        <div class="card-body">
          <!-- Subscription -->
          <h6  class="card-subtitle mb-2 text-muted">{{ message.nickname }}</h6>
@@ -19,7 +20,7 @@
            <textarea v-model="subCategory" class="form-control"></textarea>
          </div>
          <!-- price -->
-         <p v-if="message !== editingMessage" class="card-text">Price: {{ message.price }}</p>
+         <p v-if="message !== editingMessage" class="card-text">Price: ${{ message.price }}</p>
          <div v-else>
            <p>Price:</p>
            <textarea v-model="subPrice" class="form-control"></textarea>
@@ -71,8 +72,10 @@
        </div>
      </div>
 
+
      <hr>
-     <div class="card-outer">
+     <div class="card card-outer">
+
      <!-- New Message -->
      <form v-if="!editingMessage" @submit.prevent="storeMessage">
 
@@ -128,10 +131,13 @@
          <textarea v-model="messageText" class="form-control"></textarea>
        </div>
 
-       <button type="submit" :disabled="$v.$invalid" class="btn btn-primary">Add Subscription</button>
+        <br>
+       <button type="submit" :disabled="$v.$invalid" class="btn btn-primary btn-send">Add Subscription</button>
      </form>
    </div>
  </div>
+ <br>
+ <br>
 
 </template>
 
@@ -170,6 +176,7 @@ export default {
       user: null
     };
   },
+
   validations: {
 
     nickname : {
@@ -197,6 +204,7 @@ export default {
     // }
   },
 
+
   created() {
     let ref = db.collection("users");
     ref
@@ -219,10 +227,10 @@ export default {
       .where("to", "==", this.$route.params.id)
       .onSnapshot(snapshot => {
         snapshot.docChanges.forEach(change => {
+
           if (change.type == "added") {
             this.messages.push({
               id: change.doc.id,
-              //   from: change.doc.data().from,
               text: change.doc.data().text,
               nickname: change.doc.data().nickname,
               price: change.doc.data().price,
@@ -231,14 +239,17 @@ export default {
               date: change.doc.data().date,
               reminder: change.doc.data().reminder
             });
+
           } else if (change.type == "removed") {
             const index = this.messages.indexOf(change.doc.data().id);
             this.messages.splice(index, 1);
             console.log(index);
+
           } else if (change.type == "modified") {
-            //   from: change.doc.data().from,
             console.log("FINDING");
-            const updatedMessage = this.messages.find(message => message.id === change.doc.id);
+            const updatedMessage = this.messages.find(
+              message => message.id === change.doc.id
+            );
             const index = this.messages.indexOf(updatedMessage);
             console.log(index);
             this.messages[index].text = change.doc.data().text;
@@ -248,56 +259,9 @@ export default {
             this.messages[index].date = change.doc.data().date;
             this.messages[index].reminder = change.doc.data().reminder;
             console.log(change.doc.data());
-            // this.messages.set({
-            // text: change.doc.data().text;
-            // category: change.doc.data().category,
-            // price: change.doc.data().price,
-            // frequency: change.doc.data().frequency,
-            // date: change.doc.data().date,
-            // reminder: change.doc.data().reminder,
-            // })
           }
-
-          //   else if (change.type == "removed"){
-          //        this.messages.unshift({
-          //       id: change.doc.id,
-          //       //   from: change.doc.data().from,
-          //       text: change.doc.data().text,
-          //       nickname: change.doc.data().nickname,
-          //       price: change.doc.data().price,
-          //       category: change.doc.data().category,
-          //       frequency: change.doc.data().frequency,
-          //       date: change.doc.data().date,
-          //       reminder: change.doc.data().reminder
-          //     });
-          //   }
         });
       });
-
-    // ref.on("child_added", snapshot => {
-    //   this.messages.push({
-    //     ...snapshot.val(),
-    //     id: snapshot.key
-    //   });
-    // });
-    // ref.on("child_removed", snapshot => {
-    //   const deletedMessage = this.messages.find(
-    //     message => message.id === snapshot.key
-    //   );
-    //   const index = this.messages.indexOf(deletedMessage);
-    //   this.messages.splice(index, 1);
-    // });
-    // ref.on("child_changed", snapshot => {
-    //   const updatedMessage = this.messages.find(
-    //     message => message.id === snapshot.key
-    //   );
-    //   updatedMessage.text = snapshot.val().text;
-    //   updatedMessage.category = snapshot.val().category;
-    //   updatedMessage.price = snapshot.val().price;
-    //   updatedMessage.frequency = snapshot.val().frequency;
-    //   updatedMessage.date = snapshot.val().date;
-    //   updatedMessage.reminder = snapshot.val().reminder;
-    // });
   },
   methods: {
     storeMessage() {
@@ -326,43 +290,13 @@ export default {
         .doc(message.id)
         .delete()
         .then(function() {
-          //   db.collection("subscriptions").on("child_removed", snapshot => {
-          //     const deletedMessage = this.message.id.find(
-          //       message => message.id === snapshot.key
-          //     );
-          //     const index = this.messages.indexOf(deletedMessage);
-          //     this.messages.splice(index, 1);
-          //   });
+       
           console.log("Document successfully deleted!");
         })
         .catch(function(error) {
           console.error("Error removing document: ", error);
         });
       console.log(message.id);
-      // re render the page.
-      //   ref
-      //     .delete() // sets the contents of the doc using the id
-      //     .then(() => {
-      //         console.log(ref.id);
-      // fetch the doc again and show its data
-      //   ref.get().then(doc => {
-      //     console.log(doc.data()); // prints {id: "the unique id"}
-      //   });
-      // });
-      // db.collection('subscriptions').doc.data().delete()
-      //   var rmv = db.collection('subscriptions')
-      //     console.log(rmv)
-
-      //   db
-      //     .collection("subscriptions")
-      //     .doc()
-      //     .delete()
-      //     .then(function() {
-      //       console.log("Document successfully deleted!");
-      //     })
-      //     .catch(function(error) {
-      //       console.error("Error removing document: ", error);
-      //     });
     },
 
     editMessage(message) {
@@ -403,21 +337,40 @@ export default {
 </script>
 
 <style>
-.input.invalid input {
-  border: 1px solid red;
-  background-color: rgb(214, 72, 72); 
-}
-.input.invalid label {
-  color: red;
+
+.btn-send {
+  background-color: #FFCE63;
 }
 .form-group p {
   color: red;
 }
-
-.card-outer {
-  /* background-color:#71ADB5; */
+.input.invalid label {
+  color: red;
 }
-.card {
-  /* background-color: #176D81 */
+.input.invalid input {
+  border: 1px solid red;
+  background-color: rgb(214, 72, 72); 
+}
+.card-outer {
+
+  padding: 10px;
+}
+.subcard {
+  color: #161D6E;
+  padding: 10px;
+  margin: 15px;
+}
+
+.card-subtitle {
+  font-size: 25px;
+  font-family: 'Noto Sans', sans-serif;
+}
+
+.card-text {
+  margin: 0 0 0 10;
+}
+
+.card-link {
+  padding: 10px;
 }
 </style>

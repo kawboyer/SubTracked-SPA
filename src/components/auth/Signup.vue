@@ -1,8 +1,10 @@
 <template>
   <div class="signup container">
     <form class="card-panel" @submit.prevent="signup">
-      <h2 class="center deep-purple-text">Signup</h2>
+
+      <h2 class="center signup-text">Signup</h2>
       <div class="field"  v-bind:class="{invalid: $v.email.$error }">
+
         <label for="email">Email</label>
         <input id="email" type="email" v-model="email" @blur="$v.email.$touch()">
         <p v-if="!$v.email.email">You must provide a vaild email address</p>
@@ -23,8 +25,11 @@
         <input id="name" type="text" v-model="alias">
       </div>
       <p v-if="feedback" class="red-text center">{{ feedback }}</p>
+      <br>
       <div class="field center">
-        <button class="btn deep-purple" :disabled="$v.$invalid">Signup</button>
+
+        <button class="btn signup-btn" :disabled="$v.$invalid">Signup</button>
+
       </div>
     </form>
   </div>
@@ -80,10 +85,12 @@ export default {
               ref.set({
                 alias: this.alias,
                 user_id: user.uid
+
               });
               return user;
             }).then((user) => {
               this.$router.push({ name: 'Subscript',  params: {id: user.uid}})
+
             })
             .catch(err => {
               this.feedback = err.message
@@ -93,7 +100,9 @@ export default {
       } else {
         this.feedback = 'Please fill in all fields'
       }
+
     }
+
     //  logout() {
     //   firebase
     //     .auth()
@@ -116,5 +125,16 @@ export default {
 }
 .signup .field{
   margin-bottom: 16px;
+}
+
+.signup-btn {
+  background-color: #31708E;
+  color: #F7F9FB;
+  font-family: 'Noto Sans', sans-serif;
+}
+
+.signup-text {
+  color: #31708E;
+  font-family: 'Noto Sans', sans-serif;
 }
 </style>
