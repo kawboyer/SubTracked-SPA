@@ -1,7 +1,9 @@
 <template>
   <div>
+
     <p>Monthly Expenses: ${{this.subTotal}} </p>
     <p>Annual Expenses: ${{this.annualTotal}} </p>
+
   </div>
 </template>
 
@@ -72,7 +74,9 @@ export default {
 </script>
 
 <style>
-p {
+h6 {
+  font-family: 'Noto Sans', sans-serif;
+  size: 50px;
   text-align: center;
 }
 </style>

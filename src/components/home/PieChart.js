@@ -54,6 +54,7 @@ export default {
               });
               console.log(totals);
 
+
               // Render Chart
               
               this.renderChart(
@@ -77,6 +78,7 @@ export default {
                 },
                 { responsive: true, maintainAspectRatio: false }
               );
+
             }
           })
           .catch(function(error) {

@@ -52,7 +52,9 @@ export default {
 
 <style>
 .navbar-color {
-  background-color: #0D3446
+  background-color:#31708E;
+  color: #F7F9FB;
+  font-family: 'Noto Sans', sans-serif;
 }
 
 </style>
