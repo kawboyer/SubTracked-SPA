@@ -8,9 +8,8 @@
      <!-- Messages -->
      <div v-for="(message, index) in messages" v-bind:key="index" class="card">
        <div class="card-body">
-           
          <!-- Subscription -->
-         <h6 class="card-subtitle mb-2 text-muted">{{ message.nickname }}</h6>
+         <h6  class="card-subtitle mb-2 text-muted">{{ message.nickname }}</h6>
         
          <!-- SUBSCRIPTION CONTENT -->
          <!-- Category -->
@@ -72,39 +71,56 @@
        </div>
      </div>
 
-
      <hr>
      <div class="card-outer">
      <!-- New Message -->
      <form v-if="!editingMessage" @submit.prevent="storeMessage">
-       <div class="form-group">
+
+       <div class="form-group"  v-bind:class="{ invalid: $v.nickname.$error }">
          <label>Subscription:</label>
-         <input v-model="nickname" class="form-control" />
+          <input v-model.trim="nickname" class="form-control" @blur="$v.nickname.$touch()"/>
+          <p v-if="!$v.nickname.required">You must enter a subscription</p>
        </div>
        <!-- Category -->
-       <div class="form-group">
-         <label>Category:</label>
-         <input v-model="subCategory" class="form-control" />
-       </div>
+         <div class="form-group" v-bind:class="{ invalid: $v.subCategory.$error }">
+           <label>Category:</label>
+           <input v-model.trim="subCategory" class="form-control" @blur="$v.subCategory.$touch()" />
+            <p v-if="!$v.subCategory.required">You must select a valid category</p>
+          </div>
+
+          <!-- ATTEMPTING TO MAKE DROPDOWN FOR CHOICES -->
+         <!-- <label>Category:</label>
+         <select v-model="subCategory" @blur="$v.subCategory.$touch()" placeholder="Select a category">
+            <option v-for="catOption in catOptions" v-bind:value="catOptions.value">
+              {{catOptions.text}}
+            </option>
+         </select>
+
+         <p v-if="!$v.subCategory.required">You must select a valid category</p>
+       </div> -->
+       
        <!-- price -->
-       <div class="form-group">
+       <div class="form-group" :class="{invalid: $v.subPrice.$error}">
          <label>Price:</label>
-         <input v-model="subPrice" class="form-control" />
+         <input v-model.number="subPrice" class="form-control" @blur="$v.subPrice.$touch()" />
+       <p v-if="!$v.subPrice.numeric">You must enter a vailid price</p>
        </div>
        <!-- frequency -->
-       <div class="form-group">
+       <div class="form-group" :class="{invalid: $v.subFrequency.$error}">
          <label>Frequency:</label>
-         <input v-model="subFrequency" class="form-control" />
+         <input v-model="subFrequency" class="form-control" @blur="$v.subFrequency.$touch()" />
+         <p v-if="!$v.subFrequency.required">You must enter the subscription frequency</p>
        </div>
        <!-- date -->
-       <div class="form-group">
+       <div class="form-group" :class="{invalid: $v.subStartDate.$error}">
          <label>Start Date:</label>
-         <input v-model="subStartDate" class="form-control" />
+         <input v-model="subStartDate" class="form-control" @blur="$v.subStartDate.$touch()" />
+          <p v-if="!$v.subStartDate.required">You must enter a valid start date for your subscription</p>
        </div>
        <!-- reminder -->
-       <div class="form-group">
+       <div class="form-group" > 
          <label>Reminder:</label>
-         <input v-model="subReminder" class="form-control" />
+         <input v-model="subReminder" class="form-control"/>
        </div>
        <!-- notes -->
        <div class="form-group">
@@ -112,7 +128,7 @@
          <textarea v-model="messageText" class="form-control"></textarea>
        </div>
 
-       <button class="btn btn-primary">Send</button>
+       <button type="submit" :disabled="$v.$invalid" class="btn btn-primary">Add Subscription</button>
      </form>
    </div>
  </div>
@@ -124,6 +140,7 @@ import PieChart from "@/components/home/PieChart";
 import Total from "@/components/home/Total";
 import db from "@/firebase/init";
 import firebase from "firebase";
+import { required, numeric } from 'vuelidate/lib/validators'
 
 export default {
   name: "Subscript",
@@ -137,6 +154,14 @@ export default {
       messageText: "",
       nickname: "",
       subCategory: "",
+      catOptions: [
+        {text: 'Food', value: 'Food'},
+        {text: 'Entertainment', value: 'Entertainment'},
+        {text: 'Games', value: 'Games'},
+        {text: 'Books', value: 'Shopping'},
+        {text: 'Music', value: 'Music'},
+        {text: 'Miscellaneous', value: 'Miscellaneous'}
+      ],
       subPrice: "",
       subFrequency: "",
       subStartDate: "",
@@ -145,11 +170,33 @@ export default {
       user: null
     };
   },
-  //   firestore() {
-  //     return {
-  //       messages: db.collection("subscriptions")
-  //     };
-  //   },
+  validations: {
+
+    nickname : {
+      required
+    },
+    subCategory: {
+      required
+    },
+    subPrice: {
+      required,
+      numeric
+    },
+    subFrequency: {
+      required
+    },
+    subStartDate: {
+      required
+    },
+    subStartDate: {
+      required
+    }
+    //For future dev when adding a reminder
+    // subReminder: {
+    //   required
+    // }
+  },
+
   created() {
     let ref = db.collection("users");
     ref
@@ -356,10 +403,21 @@ export default {
 </script>
 
 <style>
+.input.invalid input {
+  border: 1px solid red;
+  background-color: rgb(214, 72, 72); 
+}
+.input.invalid label {
+  color: red;
+}
+.form-group p {
+  color: red;
+}
+
 .card-outer {
-  background-color:#71ADB5;
+  /* background-color:#71ADB5; */
 }
 .card {
-  background-color: #176D81
+  /* background-color: #176D81 */
 }
 </style>

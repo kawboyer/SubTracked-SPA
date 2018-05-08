@@ -12,7 +12,7 @@
             </div>
             <p v-if="feedback" class="red-text center">{{ feedback }}</p>
             <div class="field">
-                <button class="btn deep-purple">Login</button>
+                <button class="btn deep-purple" >Login</button>
             </div>
         </form>
     </div>
