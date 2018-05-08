@@ -4,7 +4,7 @@
       <div class="container">
         <!-- REPLACE THE a herf below with this if we want to redirect it -->
         <li class="brand-logo left" v-if="user"><router-link :to="{ name: 'Subscript', params: {id: user.uid}}">Subtracked</router-link></li>
-        <li class="brand-logo left" v-if="!user"><router-link :to="{ name: 'Login' }">Subtracked</router-link></li>
+        <li class="brand-logo left" v-if="!user"><router-link :to="{ name: 'Login' }">SubTracked</router-link></li>
 
 
         <ul class="right">
