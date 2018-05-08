@@ -54,23 +54,22 @@ export default {
               });
               console.log(totals);
 
-
               // Render Chart
-              
+
               this.renderChart(
                 {
                   labels: Object.keys(totals),
                   datasets: [
                     {
                       backgroundColor: [
-                        "#FCFA70",
-                        "#6A99CB",
-                        "#4D7CAE",
-                        "#375A7F",
-                        "#FCFA70",
-                        "#6A99CB",
-                        "#4D7CAE",
-                        "#FCFA70"
+                        "#31708E",
+                        "#5085A5",
+                        "#8FC1E3",
+                        "#687864",
+                        "#31708E",
+                        "#5085A5",
+                        "#8FC1E3",
+                        "#687864"
                       ],
                       data: Object.values(totals)
                     }
@@ -78,7 +77,6 @@ export default {
                 },
                 { responsive: true, maintainAspectRatio: false }
               );
-
             }
           })
           .catch(function(error) {
