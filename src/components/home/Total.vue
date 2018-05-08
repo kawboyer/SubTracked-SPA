@@ -79,4 +79,7 @@ h6 {
   size: 50px;
   text-align: center;
 }
+p {
+  text-align: center;
+}
 </style>
