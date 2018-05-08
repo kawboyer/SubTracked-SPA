@@ -145,11 +145,7 @@ export default {
       user: null
     };
   },
-  //   firestore() {
-  //     return {
-  //       messages: db.collection("subscriptions")
-  //     };
-  //   },
+
   created() {
     let ref = db.collection("users");
     ref
@@ -172,10 +168,10 @@ export default {
       .where("to", "==", this.$route.params.id)
       .onSnapshot(snapshot => {
         snapshot.docChanges.forEach(change => {
+
           if (change.type == "added") {
             this.messages.push({
               id: change.doc.id,
-              //   from: change.doc.data().from,
               text: change.doc.data().text,
               nickname: change.doc.data().nickname,
               price: change.doc.data().price,
@@ -184,14 +180,17 @@ export default {
               date: change.doc.data().date,
               reminder: change.doc.data().reminder
             });
+
           } else if (change.type == "removed") {
             const index = this.messages.indexOf(change.doc.data().id);
             this.messages.splice(index, 1);
             console.log(index);
+
           } else if (change.type == "modified") {
-            //   from: change.doc.data().from,
             console.log("FINDING");
-            const updatedMessage = this.messages.find(message => message.id === change.doc.id);
+            const updatedMessage = this.messages.find(
+              message => message.id === change.doc.id
+            );
             const index = this.messages.indexOf(updatedMessage);
             console.log(index);
             this.messages[index].text = change.doc.data().text;
@@ -201,56 +200,9 @@ export default {
             this.messages[index].date = change.doc.data().date;
             this.messages[index].reminder = change.doc.data().reminder;
             console.log(change.doc.data());
-            // this.messages.set({
-            // text: change.doc.data().text;
-            // category: change.doc.data().category,
-            // price: change.doc.data().price,
-            // frequency: change.doc.data().frequency,
-            // date: change.doc.data().date,
-            // reminder: change.doc.data().reminder,
-            // })
           }
-
-          //   else if (change.type == "removed"){
-          //        this.messages.unshift({
-          //       id: change.doc.id,
-          //       //   from: change.doc.data().from,
-          //       text: change.doc.data().text,
-          //       nickname: change.doc.data().nickname,
-          //       price: change.doc.data().price,
-          //       category: change.doc.data().category,
-          //       frequency: change.doc.data().frequency,
-          //       date: change.doc.data().date,
-          //       reminder: change.doc.data().reminder
-          //     });
-          //   }
         });
       });
-
-    // ref.on("child_added", snapshot => {
-    //   this.messages.push({
-    //     ...snapshot.val(),
-    //     id: snapshot.key
-    //   });
-    // });
-    // ref.on("child_removed", snapshot => {
-    //   const deletedMessage = this.messages.find(
-    //     message => message.id === snapshot.key
-    //   );
-    //   const index = this.messages.indexOf(deletedMessage);
-    //   this.messages.splice(index, 1);
-    // });
-    // ref.on("child_changed", snapshot => {
-    //   const updatedMessage = this.messages.find(
-    //     message => message.id === snapshot.key
-    //   );
-    //   updatedMessage.text = snapshot.val().text;
-    //   updatedMessage.category = snapshot.val().category;
-    //   updatedMessage.price = snapshot.val().price;
-    //   updatedMessage.frequency = snapshot.val().frequency;
-    //   updatedMessage.date = snapshot.val().date;
-    //   updatedMessage.reminder = snapshot.val().reminder;
-    // });
   },
   methods: {
     storeMessage() {
@@ -279,43 +231,13 @@ export default {
         .doc(message.id)
         .delete()
         .then(function() {
-          //   db.collection("subscriptions").on("child_removed", snapshot => {
-          //     const deletedMessage = this.message.id.find(
-          //       message => message.id === snapshot.key
-          //     );
-          //     const index = this.messages.indexOf(deletedMessage);
-          //     this.messages.splice(index, 1);
-          //   });
+       
           console.log("Document successfully deleted!");
         })
         .catch(function(error) {
           console.error("Error removing document: ", error);
         });
       console.log(message.id);
-      // re render the page.
-      //   ref
-      //     .delete() // sets the contents of the doc using the id
-      //     .then(() => {
-      //         console.log(ref.id);
-      // fetch the doc again and show its data
-      //   ref.get().then(doc => {
-      //     console.log(doc.data()); // prints {id: "the unique id"}
-      //   });
-      // });
-      // db.collection('subscriptions').doc.data().delete()
-      //   var rmv = db.collection('subscriptions')
-      //     console.log(rmv)
-
-      //   db
-      //     .collection("subscriptions")
-      //     .doc()
-      //     .delete()
-      //     .then(function() {
-      //       console.log("Document successfully deleted!");
-      //     })
-      //     .catch(function(error) {
-      //       console.error("Error removing document: ", error);
-      //     });
     },
 
     editMessage(message) {
@@ -357,9 +279,9 @@ export default {
 
 <style>
 .card-outer {
-  background-color:#71ADB5;
+  background-color: #71adb5;
 }
 .card {
-  background-color: #176D81
+  background-color: #176d81;
 }
 </style>
