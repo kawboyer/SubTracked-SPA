@@ -1,12 +1,13 @@
 <template>
 
 <div class="container">
+    <br>
     <PieChart></PieChart>
     <Total></Total>
 
    <div id="subscription" class="container">
      <!-- Messages -->
-     <div v-for="(message, index) in messages" v-bind:key="index" class="card">
+     <div v-for="(message, index) in messages" v-bind:key="index" class="card subcard">
        <div class="card-body">
            
          <!-- Subscription -->
@@ -20,7 +21,7 @@
            <textarea v-model="subCategory" class="form-control"></textarea>
          </div>
          <!-- price -->
-         <p v-if="message !== editingMessage" class="card-text">Price: {{ message.price }}</p>
+         <p v-if="message !== editingMessage" class="card-text">Price: ${{ message.price }}</p>
          <div v-else>
            <p>Price:</p>
            <textarea v-model="subPrice" class="form-control"></textarea>
@@ -72,9 +73,7 @@
        </div>
      </div>
 
-
-     <hr>
-     <div class="card-outer">
+     <div class="card card-outer">
      <!-- New Message -->
      <form v-if="!editingMessage" @submit.prevent="storeMessage">
        <div class="form-group">
@@ -111,11 +110,13 @@
          <label>Message:</label>
          <textarea v-model="messageText" class="form-control"></textarea>
        </div>
-
-       <button class="btn btn-primary">Send</button>
-     </form>
-   </div>
- </div>
+       <br>
+       <button class="btn btn-primary btn-send">Add Subscription</button>
+      </form>
+    </div>
+  </div>
+  <br>
+  <br>
 
 </template>
 
@@ -356,10 +357,29 @@ export default {
 </script>
 
 <style>
-.card-outer {
-  background-color:#71ADB5;
+.btn-send {
+  background-color: #FFCE63;
 }
-.card {
-  background-color: #176D81
+
+.card-outer {
+  padding: 10px;
+}
+.subcard {
+  color: #161D6E;
+  padding: 10px;
+  margin: 15px;
+}
+
+.card-subtitle {
+  font-size: 25px;
+  font-family: 'Noto Sans', sans-serif;
+}
+
+.card-text {
+  margin: 0 0 0 10;
+}
+
+.card-link {
+  padding: 10px;
 }
 </style>
