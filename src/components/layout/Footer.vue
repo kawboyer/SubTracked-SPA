@@ -1,28 +1,28 @@
 <template>
 <footer class="page-footer">
-<div class="container">
-  <div class="row">
-    <div class="col l6 s12">
-      <h5 class="white-text">About SubTracked</h5>
-      <p class="grey-text text-lighten-4">SubTracked is designed to help you keep track of all of your subscriptions and show you where your money goes each month. It helps you keep track of when free trials are about to end so that you can remember to unsubscribe before it starts charging you. The ultimate goal of SubTracked is to help subtract unwanted subscriptions and charges from your monthly expenses.</p>
-    </div>
-    <div class="col l4 offset-l2 s12">
-      <h5 class="white-text">Github Links</h5>
-      <ul>
-        <li><a class="grey-text text-lighten-3" v-bind:href="this.results[0].link"> {{this.results[0].name}} </a></li>
-        <li><a class="grey-text text-lighten-3" v-bind:href="this.results[1].link"> {{this.results[1].name}} </a></li>
-        <li><a class="grey-text text-lighten-3" v-bind:href="this.results[2].link"> {{this.results[2].name}} </a></li>
-        <li><a class="grey-text text-lighten-3" v-bind:href="this.results[3].link"> {{this.results[3].name}} </a></li>
-      </ul>
-    </div>
-  </div>
-</div>
-<div class="footer-copyright">
   <div class="container">
-    © 2017 Copyright Text
-      <!-- <a class="grey-text text-lighten-4 right" href="#!">More Links</a> -->
+    <div class="row">
+      <div class="col l6 s12">
+        <h5 class="white-text">About SubTracked</h5>
+        <p class="footer-text grey-text text-lighten-4">Overwhelmed by subscriptions and free trials? SubTracked keeps track of all your online subscriptions in one convenient app. We monitor your monthly charges and notify you when your free trials are about to expire. Save time. Save money.</p>
+      </div>
+      <div class="col l4 offset-l2 s12">
+        <h5 class="footer-github white-text">Github Links</h5>
+        <ul class="footer-github">
+          <li><a class="footer-github grey-text text-lighten-3" v-bind:href="this.results[0].link"> {{this.results[0].name}} </a></li>
+          <li><a class="footer-github grey-text text-lighten-3" v-bind:href="this.results[1].link"> {{this.results[1].name}} </a></li>
+          <li><a class="footer-github grey-text text-lighten-3" v-bind:href="this.results[2].link"> {{this.results[2].name}} </a></li>
+          <li><a class="footer-github grey-text text-lighten-3" v-bind:href="this.results[3].link"> {{this.results[3].name}} </a></li>
+        </ul>
+      </div>
+    </div>
   </div>
-</div>
+  <div class="footer-copyright">
+    <div class="container">
+      © 2018 SubTracked
+        <!-- <a class="grey-text text-lighten-4 right" href="#!">More Links</a> -->
+    </div>
+  </div>
 </footer>
 </template>
 
@@ -47,7 +47,19 @@ export default {
 </script>
 
 <style>
+
+  .footer-text {
+    text-align: left;
+  }
+
+  .footer-github {
+    text-align: right;
+  }
+
   .page-footer {
-    background-color: #0D3446
+    background-color: #31708E;
+    bottom: 0px;
+    color: #F7F9FB;
+    font-family: 'Noto Sans', sans-serif;
   }
 </style>
