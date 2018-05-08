@@ -43,12 +43,13 @@ export default {
 
                 // If a category already exists
                 if (totals[category]) {
+                  console.log(totals);
                   // Sum up all prices in that category
-                  totals[category] += adjPrice.toFixed(2);
+                  totals[category] += parseFloat(adjPrice.toFixed(2));
                 }
                 // Else set the value equal to the price
                 else {
-                  totals[category] = adjPrice.toFixed(2);
+                  totals[category] = parseFloat(adjPrice.toFixed(2));
                 }
                 // console.log(doc.data());
               });
