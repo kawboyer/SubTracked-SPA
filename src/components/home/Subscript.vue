@@ -44,9 +44,9 @@
          <!-- <textarea v-else v-model="subStartDate" class="form-control"></textarea> -->
 
          <!-- reminder -->
-         <p v-if="message !== editingMessage" class="card-text">Reminder: {{ message.reminder }}</p>
+         <p v-if="message !== editingMessage" class="card-text">Reminder Date: {{ message.reminder }}</p>
          <div v-else>
-           <p>Reminder:</p>
+           <p>Reminder Date:</p>
            <textarea v-model="subReminder" class="form-control"></textarea>
          </div>
          <!-- <textarea v-else v-model="subReminder" class="form-control"></textarea> -->
@@ -82,13 +82,13 @@
        <div class="form-group"  v-bind:class="{ invalid: $v.nickname.$error }">
          <label>Subscription:</label>
           <input v-model.trim="nickname" class="form-control" @blur="$v.nickname.$touch()"/>
-          <p v-if="!$v.nickname.required">You must enter a subscription</p>
+          <p v-if="!$v.nickname.required">Enter a subscription</p>
        </div>
        <!-- Category -->
          <div class="form-group" v-bind:class="{ invalid: $v.subCategory.$error }">
            <label>Category:</label>
            <input v-model.trim="subCategory" class="form-control" @blur="$v.subCategory.$touch()" />
-            <p v-if="!$v.subCategory.required">You must select a valid category</p>
+            <p v-if="!$v.subCategory.required">Enter a category</p>
           </div>
 
           <!-- ATTEMPTING TO MAKE DROPDOWN FOR CHOICES -->
@@ -106,23 +106,23 @@
        <div class="form-group" :class="{invalid: $v.subPrice.$error}">
          <label>Price:</label>
          <input v-model.number="subPrice" class="form-control" @blur="$v.subPrice.$touch()" />
-       <p v-if="!$v.subPrice.required">You must enter a valid price</p>
+       <p v-if="!$v.subPrice.required">Enter a valid price</p>
        </div>
        <!-- frequency -->
        <div class="form-group" :class="{invalid: $v.subFrequency.$error}">
          <label>Frequency:</label>
          <input v-model="subFrequency" class="form-control" @blur="$v.subFrequency.$touch()" />
-         <p v-if="!$v.subFrequency.required">You must enter the subscription frequency</p>
+         <p v-if="!$v.subFrequency.required">Enter the subscription frequency</p>
        </div>
        <!-- date -->
        <div class="form-group" :class="{invalid: $v.subStartDate.$error}">
          <label>Start Date:</label>
          <input v-model="subStartDate" class="form-control" @blur="$v.subStartDate.$touch()" />
-          <p v-if="!$v.subStartDate.required">You must enter a valid start date for your subscription</p>
+          <p v-if="!$v.subStartDate.required">Enter a start date for your subscription</p>
        </div>
        <!-- reminder -->
        <div class="form-group" > 
-         <label>Reminder:</label>
+         <label>Reminder Date:</label>
          <input v-model="subReminder" class="form-control"/>
        </div>
        <!-- notes -->
