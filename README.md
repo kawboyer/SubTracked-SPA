@@ -1,13 +1,12 @@
 # SubTracked
 
 ## Contributors:
-Erik Augenzuker GitHub Repo
-Klara Boyer GitHub Repo 
-Josh Dulin GitHub Repo 
-Taddes Korris GitHub Repo
+Erik Augenzuker [GitHub Repo] (https://github.com/Eaug2)
+Klara Boyer [GitHub Repo] (https://github.com/kawboyer)
+Josh Dulin [GitHub Repo] (https://github.com/jzdulin)
+Taddes Korris [GitHub Repo] (https://github.com/taddes)
 
-## SubTracked 
-is a new app that tracks all of your monthly subscriptions and expenses. Most people have a myriad of subscriptions to services including cloud storage, media streaming, digital magazines, music streaming, food prep services, shaving clubs and much more. It's easy to lose track of which subscriptions you use or get stuck paying for a subscription after a free trial period has expired. It's also really easy to accumulate many subscriptions you don't use, with several similar subscriptions overlapping without your knowing it. With SubTrack, you don't have to worry. You can program in your monthly subscriptions, as well as other expenses and get a good idea of what you spend your hard-earned money on month to month.
+SubTracked is a new app that tracks all of your monthly subscriptions and expenses. Most people have a myriad of subscriptions to services including cloud storage, media streaming, digital magazines, music streaming, food prep services, shaving clubs and much more. It's easy to lose track of which subscriptions you use or get stuck paying for a subscription after a free trial period has expired. It's also really easy to accumulate many subscriptions you don't use, with several similar subscriptions overlapping without your knowing it. With SubTrack, you don't have to worry. You can program in your monthly subscriptions, as well as other expenses and get a good idea of what you spend your hard-earned money on month to month.
 
 ## Premise
 SubTrack satisfies the need for people to keep track of their monthly expenses. With most subscriptions being digital these days -with no bills in the mail to remind you-it has become very easy to accumulate subscriptions that add up to a lot of money every month. Furthermore, many people forget to cancel subscriptions before their free-trial periods and end up paying for services needlessly just because they failed to cancel in time.
