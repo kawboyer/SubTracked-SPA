@@ -1,10 +1,13 @@
 # SubTracked
 
 ## Contributors:
-Erik Augenzuker [GitHub Repo] (https://github.com/Eaug2)
-Klara Boyer [GitHub Repo] (https://github.com/kawboyer)
-Josh Dulin [GitHub Repo] (https://github.com/jzdulin)
-Taddes Korris [GitHub Repo] (https://github.com/taddes)
+Erik Augenzuker [GitHub Repo](https://github.com/Eaug2)
+
+Klara Boyer [GitHub Repo](https://github.com/kawboyer)
+
+Josh Dulin [GitHub Repo](https://github.com/jzdulin)
+
+Taddes Korris [GitHub Repo](https://github.com/taddes)
 
 SubTracked is a new app that tracks all of your monthly subscriptions and expenses. Most people have a myriad of subscriptions to services including cloud storage, media streaming, digital magazines, music streaming, food prep services, shaving clubs and much more. It's easy to lose track of which subscriptions you use or get stuck paying for a subscription after a free trial period has expired. It's also really easy to accumulate many subscriptions you don't use, with several similar subscriptions overlapping without your knowing it. With SubTrack, you don't have to worry. You can program in your monthly subscriptions, as well as other expenses and get a good idea of what you spend your hard-earned money on month to month.
 
