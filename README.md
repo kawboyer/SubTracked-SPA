@@ -1,7 +1,7 @@
 # SubTracked
 
 ## Track and manage online subscriptions to subtract cost from monthly expenses.
-## Technologies used: Javascript, Node, Express, Firebase, Chart.js, Vue, Vuelidate, Vuex, Materialize. 
+# Technologies used: Javascript, Node, Express, Firebase, Chart.js, Vue, Vuelidate, Vuex, Materialize. 
 
 
 ### Contributors
