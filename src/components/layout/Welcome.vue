@@ -16,7 +16,6 @@ export default {
 
 <style>
   #welcome-background {
-    background: src="@/assets/more_time.jpg"/>
     height: 100%;
     opacity: 50%;
   }
