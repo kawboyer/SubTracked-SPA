@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Footer from '@/components/layout/Footer'
 import Navbar from '@/components/layout/Navbar'
+import Welcome from '@/components/layout/Welcome'
+import Footer from '@/components/layout/Footer'
 import Signup from '@/components/auth/Signup'
 import Login from '@/components/auth/Login'
 import Subscript from '@/components/home/Subscript'
@@ -11,13 +12,13 @@ Vue.use(Router)
 
 const router = new Router({
   routes: [
-    // {
-    //   path: '/footer',
-    //   name: 'Footer',
-    //   component: Footer
-    // },
     {
       path: '/',
+      name: 'Welcome',
+      component: Welcome
+    },
+    {
+      path: '/login',
       name: 'Login',
       component: Login
     },
@@ -26,11 +27,6 @@ const router = new Router({
       name: 'Signup',
       component: Signup
     },
-    // {
-    //   path: '/',
-    //   name: 'Navbar',
-    //   component: Navbar
-    // },
     {
       path: '/subscript/:id',
       name: 'Subscript',

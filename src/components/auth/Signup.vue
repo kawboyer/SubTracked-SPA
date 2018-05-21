@@ -7,13 +7,13 @@
 
         <label for="email">Email</label>
         <input id="email" type="email" v-model="email" @blur="$v.email.$touch()">
-        <p v-if="!$v.email.email">You must provide a vaild email address</p>
-         <p v-if="!$v.email.required">The email field cannot be empty</p>
+        <p v-if="!$v.email.email">Provide a vaild email address</p>
+         <p v-if="!$v.email.required" class="red-text center">The email field cannot be empty</p>
       </div>
       <div class="field" v-bind:class="{invalid: $v.password.$error }">
         <label for="password">Password</label>
         <input id="password" type="password" v-model.trim="password" @blur="$v.password.$touch()">
-      </div><span class="form-group__message" v-if="!$v.password.required">Password is required.</span><span class="form-group__message" v-if="!$v.password.minLength">Password must have at least {{ $v.password.$params.minLength.min }} letters.</span>
+      </div><span class="form-group__message red-text center" v-if="!$v.password.required">Password is required</span><span class="form-group__message red-text center" v-if="!$v.password.minLength">Password must have at least {{ $v.password.$params.minLength.min }} letters.</span>
       <div class="field" v-bind:class="{ invalid: $v.repeatPassword.$error }">
         <label for="password" >Re-Enter Password</label>
         <input id="repeatPassword" type="password" v-model.trim="repeatPassword" @blur="$v.repeatPassword.$touch()">
@@ -134,4 +134,5 @@ export default {
 .field p{
   text-align: center;
 }
+
 </style>

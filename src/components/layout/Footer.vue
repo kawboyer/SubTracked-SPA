@@ -4,7 +4,7 @@
     <div class="row">
       <div class="col l6 s12">
         <h5 class="white-text">About SubTracked</h5>
-        <p class="footer-text grey-text text-lighten-4">Overwhelmed by subscriptions and free trials? SubTracked keeps track of all your online subscriptions in one convenient app. We monitor your monthly charges and notify you when your free trials are about to expire. Save time. Save money.</p>
+        <p class="footer-text grey-text text-lighten-4">Overwhelmed by subscriptions and free trials? SubTracked keeps track of all your online subscriptions in one convenient app. Monitor your monthly charges and get notified when your free trials are about to expire. Save time. Save money.</p>
       </div>
       <div class="col l4 offset-l2 s12">
         <h5 class="footer-github white-text">Github Links</h5>
@@ -20,7 +20,6 @@
   <div class="footer-copyright">
     <div class="container">
       © 2018 SubTracked
-        <!-- <a class="grey-text text-lighten-4 right" href="#!">More Links</a> -->
     </div>
   </div>
 </footer>
@@ -48,6 +47,10 @@ export default {
 
 <style>
 
+  p {
+    margin: 0;
+  }
+
   .footer-text {
     text-align: left;
   }
@@ -61,5 +64,6 @@ export default {
     bottom: 0px;
     color: #F7F9FB;
     font-family: 'Noto Sans', sans-serif;
+    padding-bottom: 0px
   }
 </style>

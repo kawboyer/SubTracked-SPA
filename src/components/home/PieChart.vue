@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import PieExample from './components/PieChart.js'
+import PieExample from '@/components/PieChart.js'
 import VueCharts from 'vue-chartjs'
 
 export default {

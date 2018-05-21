@@ -56,9 +56,6 @@ export default {
 </script>
 
 <style>
-a:hover {
-  background: #687864;
-}
 .btn {
   background-color: #31708E;
   color: #F7F9FB;

@@ -13,8 +13,8 @@ import Footer from '@/components/layout/Footer'
 export default {
   name: 'App',
   components: {
+    Footer,
     Navbar,
-    Footer
   }
 }
 </script>
@@ -22,7 +22,6 @@ export default {
 <style>
  #app {
   background-color:#F7F9FB;
-  color: #687864;
   font-family: 'Noto Sans', sans-serif;
  }
 
